@@ -2,7 +2,7 @@
 
 
 
-###### codes tests : 7613036501354 (sel) et 20252281 (poivre)
+###### codes tests : 7613036501354 (arome maggi) et 20252281 (poivre)
 import tkinter as tk
 from tkinter import messagebox
 from openfoodfacts import API, APIVersion, Country, Environment, Flavor
