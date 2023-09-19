@@ -123,15 +123,21 @@ def top_food():
         products_list.sort(key=lambda x: float(x.get('nutriments', {}).get('fat_100g', 0)))
     elif user_goal == "Plus de fibres":
         products_list.sort(key=lambda x: -float(x.get('nutriments', {}).get('fiber_100g', 0)))
+    
 
     advice = f"Voici les cinq meilleurs produits qui correspondent à votre objectif :"
 
-    top_5_products = products_list[:5]
-
-    for i, product in enumerate(top_5_products, start=1):
-        advice += f"\n{i}. {product.get('product_name', 'Nom du produit inconnu')}"
+    unique_products_set = set()
+    for i, product in enumerate(products_list[:5], start=1):
+        product_name = product.get('product_name', 'Nom du produit inconnu')
+        if product_name not in unique_products_set:
+            advice += f"\n{i}. {product_name}"
+            unique_products_set.add(product_name)
 
     result_label.config(text=advice)
+
+
+
 
 
 
