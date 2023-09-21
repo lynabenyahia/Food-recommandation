@@ -7,11 +7,7 @@ Created on Thu Sep 21 09:29:21 2023
 """
 
 import tkinter as tk
-from openfoodfacts import ProductDataset
 import pandas as pd
-import seaborn as sns
-import matplotlib.pyplot as plt
-from scipy.stats import kendalltau
 from tkinter import messagebox
 from openfoodfacts import API, APIVersion, Country, Environment, Flavor
 from tkinter import PhotoImage
@@ -326,14 +322,17 @@ def open_top5_window():
 # Création de la fenêtre principale
 root = tk.Tk()
 root.title("Menu Principal")
+root.geometry("280x250")  # Vous pouvez ajuster la taille selon vos préférences
 
 # Création du bouton pour ouvrir la fenêtre d'analyse de données
-button_data_analysis = tk.Button(root, text="Analyse de données", command=open_data_analysis_window)
-button_food_comparison = tk.Button(root, text="Comparaison d'aliments", command=open_food_comparison_window)
-button_top5 = tk.Button(root, text="Top 5 d'aliments", command=open_top5_window)
-button_data_analysis.pack()
-button_food_comparison.pack()
-button_top5.pack()
+button_data_analysis = tk.Button(root, text="Analyse de données", command=open_data_analysis_window, font=("Helvetica", 14))
+button_food_comparison = tk.Button(root, text="Comparaison d'aliments", command=open_food_comparison_window, font=("Helvetica", 14))
+button_top5 = tk.Button(root, text="Top 5 d'aliments", command=open_top5_window, font=("Helvetica", 14))
+
+# Utilisez pack ou grid pour organiser les boutons
+button_data_analysis.pack(pady=15)
+button_food_comparison.pack(pady=15)
+button_top5.pack(pady=15)
 
 # Lancer la boucle
 root.mainloop()
