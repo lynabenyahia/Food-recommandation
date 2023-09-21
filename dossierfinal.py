@@ -164,8 +164,8 @@ def open_food_comparison_window():
     window.title("Comparaison d'aliments")
 
     # Création des étiquettes et des champs de texte pour le code-barres manuel
-    label1 = tk.Label(window, text="Code-barres du produit 1:")
-    label2 = tk.Label(window, text="Code-barres du produit 2:")
+    label1 = tk.Label(window, text="Code-barres du produit 1 :")
+    label2 = tk.Label(window, text="Code-barres du produit 2 :")
     entry1 = tk.Entry(window)
     entry2 = tk.Entry(window)
     label1.pack()
@@ -174,9 +174,9 @@ def open_food_comparison_window():
     entry2.pack()
 
     # Création des étiquettes et des champs de texte pour l'envoi d'image
-    label3 = tk.Label(window, text="Chemin de l'image du code-barres (produit 1):")
+    label3 = tk.Label(window, text="Chemin de l'image du code-barres (produit 1) :")
     entry3 = tk.Entry(window)
-    label4 = tk.Label(window, text="Chemin de l'image du code-barres (produit 2):")
+    label4 = tk.Label(window, text="Chemin de l'image du code-barres (produit 2) :")
     entry4 = tk.Entry(window)
     label3.pack()
     entry3.pack()
@@ -195,10 +195,10 @@ def open_food_comparison_window():
     input_method_var = tk.StringVar()
     input_method_var.set("Code-barres manuel")
 
-    input_method_label = tk.Label(window, text="Choisissez la méthode de saisie:")
+    input_method_label = tk.Label(window, text="Choisissez la méthode de saisie :")
     input_method_menu = tk.OptionMenu(window, input_method_var, "Code-barres manuel", "Envoyer une image", command=toggle_input_method)
 
-    goal_label = tk.Label(window, text="Sélectionnez votre objectif:")
+    goal_label = tk.Label(window, text="Sélectionnez votre objectif :")
     goal_menu = tk.OptionMenu(window, goal_var, "Moins de sucres", "Plus de protéines", "Moins de calories", "Moins de gras", "Plus de fibres")
     compare_button = tk.Button(window, text="Comparer", command=recommend_food)
     result_label = tk.Label(window, text="")
@@ -379,7 +379,7 @@ def open_top5_window():
             top_5_products = sorted_df.head(5)
             advice = f"Voici les cinq meilleurs produits qui correspondent à votre objectif :"
             for i, products in enumerate(top_5_products.iterrows(), start=1):
-                advice += f"\n{i}. {products[1]['Produit']} - {products[1]['Marque']} - {products[1][nutrient_column]}g"
+                advice += f"\n{i}. {products[1]['Produit']} - {products[1]['Marque']} - {products[1][nutrient_column]}g de {nutrient_column}"
 
             result_label.config(text=advice)
         else:
@@ -395,7 +395,7 @@ def open_top5_window():
 
     goal_var = tk.StringVar()
     goal_var.set("Moins de sucres") 
-    goal_label = tk.Label(window, text="Sélectionnez votre objectif:")
+    goal_label = tk.Label(window, text="Sélectionnez votre objectif :")
     goal_menu = tk.OptionMenu(window, goal_var, "Moins de sucres", "Plus de protéines", "Moins de calories", "Moins de gras", "Plus de fibres")
     compare_button = tk.Button(window, text="Chercher", command=top_food)
     result_label = tk.Label(window, text="")
@@ -416,8 +416,8 @@ root.geometry("280x250")  # Vous pouvez ajuster la taille selon vos préférence
 
 # Création du bouton pour ouvrir la fenêtre d'analyse de données
 button_data_analysis = tk.Button(root, text="Analyse de données", command=open_data_analysis_window, font=("Helvetica", 14))
-button_food_comparison = tk.Button(root, text="Comparaison d'aliments", command=open_food_comparison_window, font=("Helvetica", 14))
-button_top5 = tk.Button(root, text="Top 5 d'aliments", command=open_top5_window, font=("Helvetica", 14))
+button_food_comparison = tk.Button(root, text="Comparaison nutritionnelle entre 2 produits alimentaires.", command=open_food_comparison_window, font=("Helvetica", 14))
+button_top5 = tk.Button(root, text="Top 5 des produits les plus recommandés", command=open_top5_window, font=("Helvetica", 14))
 
 # Utilisez pack ou grid pour organiser les boutons
 button_data_analysis.pack(pady=15)
