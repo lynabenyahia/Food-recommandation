@@ -15,6 +15,8 @@ from scipy.stats import kendalltau
 from tkinter import messagebox
 from openfoodfacts import API, APIVersion, Country, Environment, Flavor
 from tkinter import PhotoImage
+import cv2
+from PIL import Image, ImageTk
 
 # Fonction pour ouvrir la fenêtre de comparaison d'aliments
 def open_food_comparison_window():
@@ -60,37 +62,37 @@ def open_food_comparison_window():
         
         if user_goal == "Moins de sucres":
             if sugar1 < sugar2:
-                recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} qui contient {sugar2-sugar1}g moins de sucre que le produit {product2['product']['product_name_fr']}."
+                recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} - {product1['product']['brands']} qui contient {sugar2-sugar1}g moins de sucre que le produit {product2['product']['product_name_fr']} - {product2['product']['brands']}."
             elif sugar2 < sugar1:
-                recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} qui contient {sugar1-sugar2}g moins de sucre que le produit {product1['product']['product_name_fr']}."
+                recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} - {product2['product']['brands']} qui contient {sugar1-sugar2}g moins de sucre que le produit {product1['product']['product_name_fr']} - {product1['product']['brands']}."
             else:
                 recommendation = "Les deux produits ont la même teneur en sucres."
         elif user_goal == "Plus de protéines":
             if protein1 > protein2:
-                recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} qui contient {protein1-protein2}g plus de protéines que le produit {product2['product']['product_name_fr']}."
+                recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} - {product1['product']['brands']} qui contient {protein1-protein2}g plus de protéines que le produit {product2['product']['product_name_fr']} - {product2['product']['brands']}."
             elif protein2 > protein1:
-                recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} qui contient {protein2-protein1}g plus de protéines que le produit {product1['product']['product_name_fr']}."
+                recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} - {product2['product']['brands']} qui contient {protein2-protein1}g plus de protéines que le produit {product1['product']['product_name_fr']} - {product1['product']['brands']}."
             else:
                 recommendation = "Les deux produits ont la même teneur en protéines."
         elif user_goal == "Moins de calories":
             if energy1 > energy2 :
-                recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} qui contient {energy1-energy2}g Moins de calories que le produit {product2['product']['product_name_fr']}."
+                recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} - {product1['product']['brands']} qui contient {energy1-energy2}g Moins de calories que le produit {product2['product']['product_name_fr']} - {product2['product']['brands']}."
             elif energy2 > energy1 :
-                recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} qui contient {energy2-energy1}g Moins de calories que le produit {product1['product']['product_name_fr']}."
+                recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} - {product2['product']['brands']} qui contient {energy2-energy1}g Moins de calories que le produit {product1['product']['product_name_fr']} - {product1['product']['brands']}."
             else:
                 recommendation = "Les deux produits ont la même teneur en calories."
         elif user_goal == "Moins de gras":
             if fat2 > fat1 :
-                recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} qui contient {fat2-fat1}g moins de gras que le produit {product2['product']['product_name_fr']}."
+                recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} - {product1['product']['brands']} qui contient {fat2-fat1}g moins de gras que le produit {product2['product']['product_name_fr']} - {product2['product']['brands']}."
             elif fat1 > fat2 :
-                recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} qui contient {fat1-fat2}g moins de gras que le produit {product1['product']['product_name_fr']}."
+                recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} - {product2['product']['brands']} qui contient {fat1-fat2}g moins de gras que le produit {product1['product']['product_name_fr']} - {product1['product']['brands']}."
             else:
                 recommendation = "Les deux produits ont la même teneur en gras."
         elif user_goal == "Plus de fibres":
             if fiber1 > fiber2:
-                recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} qui contient {fiber1-fiber2}g plus de fibres que le produit {product2['product']['product_name_fr']}."
+                recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} - {product1['product']['brands']} qui contient {fiber1-fiber2}g plus de fibres que le produit {product2['product']['product_name_fr']} - {product2['product']['brands']}."
             elif fiber2 > fiber1:
-                recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} qui contient {fiber2-fiber1}g plus de fibres que le produit {product1['product']['product_name_fr']}."
+                recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} - {product2['product']['brands']} qui contient {fiber2-fiber1}g plus de fibres que le produit {product1['product']['product_name_fr']} - {product1['product']['brands']}."
             else:
                 recommendation = "Les deux produits ont la même teneur en fibres."
 
@@ -134,8 +136,10 @@ def open_data_analysis_window():
     title1.pack()
 
     # Charger l'image 1
-    image1 = PhotoImage(file="Corr_nutri_eco_nova.png")
+    image1 = Image.open("Corr_nutri_eco_nova.png")
+    image1 = ImageTk.PhotoImage(image1)
     label1 = tk.Label(data_analysis_window, image=image1)
+    label1.image = image1  # Conserver une référence
     label1.pack()
 
     # Titre de la deuxième image
@@ -143,25 +147,22 @@ def open_data_analysis_window():
     title2.pack()
 
     # Charger l'image 2
-    image2 = PhotoImage(file="Corr_sucres_gras.png")
+    image2 = Image.open("Corr_sucres_gras.png")
+    image2 = ImageTk.PhotoImage(image2)
     label2 = tk.Label(data_analysis_window, image=image2)
+    label2.image = image2  # Conserver une référence
     label2.pack()
 
 # Création de la fenêtre principale
 root = tk.Tk()
 root.title("Menu Principal")
 
-# Création d'un Frame pour afficher les graphiques d'analyse de données
-data_analysis_frame = tk.Frame(root)
-
-# Création des boutons sur la page d'accueil
-button_food_comparison = tk.Button(root, text="Comparaison d'aliments", command=open_food_comparison_window)
+# Création du bouton pour ouvrir la fenêtre d'analyse de données
 button_data_analysis = tk.Button(root, text="Analyse de données", command=open_data_analysis_window)
-
-# Placement des boutons et du Frame
+button_food_comparison = tk.Button(root, text="Comparaison d'aliments", command=open_food_comparison_window)
+button_data_analysis.pack()
 button_food_comparison.pack()
 button_data_analysis.pack()
-data_analysis_frame.pack()  # Le Frame pour les graphiques
 
 # Lancer la boucle
 root.mainloop()
