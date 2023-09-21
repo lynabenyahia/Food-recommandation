@@ -101,6 +101,7 @@ def top_food():
         for produit in data:
             product = {
                 'Produit': produit.get('product_name'),
+                'Marque': produit.get('brands',''),
                 'Catégorie': produit.get('categories'),
                 'Sucres': produit.get('nutriments', {}).get('sugars_100g', ''),
                 'Graisses': produit.get('nutriments', {}).get('fat_100g', ''),
@@ -146,7 +147,7 @@ def top_food():
         top_5_products = sorted_df.head(5)
         advice = f"Voici les cinq meilleurs produits qui correspondent à votre objectif :"
         for i, products in enumerate(top_5_products.iterrows(), start=1):
-            advice += f"\n{i}. {products[1]['Produit']}"
+            advice += f"\n{i}. {products[1]['Produit']} - {products[1]['Marque']} - {products[1][nutrient_column]}g"
 
         result_label.config(text=advice)
     else:
