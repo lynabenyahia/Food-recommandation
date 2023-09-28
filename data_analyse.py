@@ -15,12 +15,13 @@ from scipy.stats import kendalltau
 # =============================================================================
 # ANALYSE DE CORRÉLATION NUTRISCORE/ECOSCORE/NOVA GROUPE
 # =============================================================================
-# création de la base
+
+# création de la base de 15000 produits
 count = 0 
 data_list = []
 
 for produit in ProductDataset("csv"):
-    # Vérifier si le produit a un ecoscore_grade, un nova_group et un nutriscore_grade non nuls
+    # Vérifier si le produit est français et a un ecoscore_grade, un nova_group et un nutriscore_grade non nuls
     if (
         produit['ecoscore_grade'] != '' and produit['ecoscore_grade'] != 'unknown' and produit['ecoscore_grade'] != 'not-applicable'
         and produit['nova_group'] != ''
@@ -64,12 +65,12 @@ if __name__ == "__main__":
 # =============================================================================
 # ANALYSE DE CORRÉLATION GRAISSES/SUCRES
 # =============================================================================
-# création de la base
+# création de la base de 15000 produits
 count = 0 
 data_list2 = []
 
 for produit in ProductDataset("csv"):
-    # Vérifier si le produit a des valeurs pour les sucres et les graisses non nulles
+    # Vérifier si le produit est français a des valeurs pour les sucres et les graisses non nulles
     if (
         produit['sugars_100g'] != ''
         and produit['fat_100g'] != ''
@@ -99,4 +100,3 @@ if __name__ == "__main__":
     sns.heatmap(correlation_matrix4, annot=True, cmap='coolwarm', vmin=-1, vmax=1)
     plt.title("Corrélation entre Sucres et Graisses")
     plt.show()
-
