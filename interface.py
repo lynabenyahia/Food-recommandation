@@ -14,12 +14,9 @@ from tkinter import PhotoImage
 from comparaison import open_food_comparison_window
 from top_5 import open_top5_window
 from PIL import Image, ImageTk
-#from data_analyse import *
 
 
-# Fonction pour ouvrir la fenêtre de comparaison d'aliments
 
-#open_food_comparison_window()
 
 
 # Fonction pour ouvrir la fenêtre d'analyse de données
@@ -51,8 +48,7 @@ def open_data_analysis_window():
     label2.pack()
 
 
-# Fonction pour ouvrir la fenêtre de top 5
-#open_top5_window()
+
     
 # Création de la fenêtre principale
 root = tk.Tk()
