@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-
+#/Users/HaksNSH/Documents/GitHub/Food-recommandation/images, graphiques et slides/images codes barres/coca.jpeg
+#/Users/HaksNSH/Documents/GitHub/Food-recommandation/images, graphiques et slides/images codes barres/pepsi.jpeg
+#chemin d'acces a adapter en fonction du path depuis votre ordinateur
 import tkinter as tk
 from tkinter import messagebox
 from openfoodfacts import API, APIVersion, Country, Environment, Flavor
 import cv2
 from pyzbar.pyzbar import decode
+import os
 
 def open_food_comparison_window():
     # Connexion à l'api
@@ -23,7 +26,11 @@ def open_food_comparison_window():
 
     # Fonction pour numériser un code-barres à partir d'une image
     def code_barre(image_path):
+        if not os.path.isfile(image_path):
+            return []
         image = cv2.imread(image_path)
+        if image is None :
+            return []
         decoded_barcodes = decode(image)
         
         barcode_data_list = []  # Liste pour stocker les codes-barres
@@ -41,7 +48,8 @@ def open_food_comparison_window():
         global barcode_image1, barcode_image2 
         image_path1 = entry3.get()
         image_path2 = entry4.get()
-    
+        print("image path 1:",image_path1)
+        print("image path 2:",image_path2)
         if not image_path1 or not image_path2:
             recommendation = "Veuillez spécifier les chemins des images du code-barres pour les deux produits."
             result_label.config(text=recommendation)
@@ -49,7 +57,8 @@ def open_food_comparison_window():
 
         barcode_image1 = code_barre(image_path1)
         barcode_image2 = code_barre(image_path2)
-        
+        print("image path 1:",barcode_image1)
+        print("image path 1:",barcode_image2)
      # dans le cas où on a des erreurs...
 
         if not barcode_image1 or not barcode_image2:
@@ -108,9 +117,9 @@ def open_food_comparison_window():
                     recommendation = "Les deux produits ont la même teneur en protéines."
             elif user_goal == "Moins de calories":
                 if energy1 > energy2 :
-                    recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} - {product1['product']['brands']} qui contient {energy1-energy2}g Moins de calories que le produit {product2['product']['product_name_fr']} - {product2['product']['brands']}."
+                    recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} - {product2['product']['brands']} qui contient {energy1-energy2}kcal Moins de calories que le produit {product1['product']['product_name_fr']} - {product1['product']['brands']}."
                 elif energy2 > energy1 :
-                    recommendation = f"Choisissez le produit {product2['product']['product_name_fr']} - {product2['product']['brands']} qui contient {energy2-energy1}g Moins de calories que le produit {product1['product']['product_name_fr']} - {product1['product']['brands']}."
+                    recommendation = f"Choisissez le produit {product1['product']['product_name_fr']} - {product1['product']['brands']} qui contient {energy2-energy1}kcal Moins de calories que le produit {product2['product']['product_name_fr']} - {product2['product']['brands']}."
                 else:
                     recommendation = "Les deux produits ont la même teneur en calories."
             elif user_goal == "Moins de gras":
