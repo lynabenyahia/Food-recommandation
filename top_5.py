@@ -153,7 +153,10 @@ def open_top5_window():
             top_5_products = sorted_df.head(5)
             advice = f"Voici les cinq meilleurs produits qui correspondent à votre objectif :"
             for i, products in enumerate(top_5_products.iterrows(), start=1):
-                advice += f"\n{i}. {products[1]['Produit']} - {products[1]['Marque']} - {products[1][nutrient_column]}g de {nutrient_column}"
+                if user_goal == "Moins de calories":
+                    advice += f"\n{i}. {products[1]['Produit']} - {products[1]['Marque']} - {products[1][nutrient_column]}kcal de {nutrient_column}"
+                else :
+                    advice += f"\n{i}. {products[1]['Produit']} - {products[1]['Marque']} - {products[1][nutrient_column]}g de {nutrient_column}"
 
             result_label.config(text=advice)
         else:
