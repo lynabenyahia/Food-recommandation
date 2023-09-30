@@ -12,6 +12,8 @@ from tkinter import messagebox
 from openfoodfacts import API, APIVersion, Country, Environment, Flavor
 from tkinter import PhotoImage
 from comparaison import *
+from top_5 import *
+#from data_analyse import *
     
 # Fonction pour ouvrir la fenêtre de comparaison d'aliments
 
