@@ -11,13 +11,15 @@ import pandas as pd
 from tkinter import messagebox
 from openfoodfacts import API, APIVersion, Country, Environment, Flavor
 from tkinter import PhotoImage
-from comparaison import *
-from top_5 import *
+from comparaison import open_food_comparison_window
+from top_5 import open_top5_window
+from PIL import Image, ImageTk
 #from data_analyse import *
-    
+
+
 # Fonction pour ouvrir la fenêtre de comparaison d'aliments
 
-open_food_comparison_window()
+#open_food_comparison_window()
 
 
 # Fonction pour ouvrir la fenêtre d'analyse de données
@@ -31,7 +33,7 @@ def open_data_analysis_window():
     title1.pack()
 
     # Charger l'image 1
-    image1 = Image.open("Corr_nutri_eco_nova.png")
+    image1 = Image.open("Corr_nutri_eco_nova.png")#mettre les bon chemin
     image1 = ImageTk.PhotoImage(image1)
     label1 = tk.Label(data_analysis_window, image=image1)
     label1.image = image1  # Conserver une référence
@@ -42,7 +44,7 @@ def open_data_analysis_window():
     title2.pack()
 
     # Charger l'image 2
-    image2 = Image.open("Corr_sucres_gras.png")
+    image2 = Image.open("Corr_sucres_gras.png")#mettre le bon chemin
     image2 = ImageTk.PhotoImage(image2)
     label2 = tk.Label(data_analysis_window, image=image2)
     label2.image = image2  # Conserver une référence
@@ -50,7 +52,7 @@ def open_data_analysis_window():
 
 
 # Fonction pour ouvrir la fenêtre de top 5
-open_top5_window()
+#open_top5_window()
     
 # Création de la fenêtre principale
 root = tk.Tk()
