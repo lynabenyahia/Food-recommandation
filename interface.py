@@ -51,7 +51,7 @@ def open_data_analysis_window():
 # Création de la fenêtre principale
 root = tk.Tk()
 root.title("Menu Principal")
-root.geometry("280x250")  # taille de la fenêtre
+root.geometry("500x500")  # taille de la fenêtre
 
 # Création du bouton pour ouvrir la fenêtre d'analyse de données
 button_data_analysis = tk.Button(root, text="Analyse de données", command=open_data_analysis_window, font=("Helvetica", 14))
