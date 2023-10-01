@@ -17,8 +17,6 @@ from PIL import Image, ImageTk
 
 
 
-
-
 # Fonction pour ouvrir la fenêtre d'analyse de données
 
 def open_data_analysis_window():
@@ -30,7 +28,7 @@ def open_data_analysis_window():
     title1.pack()
 
     # Charger l'image 1
-    image1 = Image.open("Corr_nutri_eco_nova.png")#mettre les bon chemin
+    image1 = Image.open("images, graphiques et slides/graphiques corrélations/Corr_nutri_eco_nova.png")
     image1 = ImageTk.PhotoImage(image1)
     label1 = tk.Label(data_analysis_window, image=image1)
     label1.image = image1  # Conserver une référence
@@ -41,7 +39,7 @@ def open_data_analysis_window():
     title2.pack()
 
     # Charger l'image 2
-    image2 = Image.open("Corr_sucres_gras.png")#mettre le bon chemin
+    image2 = Image.open("images, graphiques et slides/graphiques corrélations/Corr_sucres_gras.png")
     image2 = ImageTk.PhotoImage(image2)
     label2 = tk.Label(data_analysis_window, image=image2)
     label2.image = image2  # Conserver une référence

@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
-#/Users/HaksNSH/Documents/GitHub/Food-recommandation/images, graphiques et slides/images codes barres/coca.jpeg
-#/Users/HaksNSH/Documents/GitHub/Food-recommandation/images, graphiques et slides/images codes barres/pepsi.jpeg
-#chemin d'acces a adapter en fonction du path depuis votre ordinateur
+
 import tkinter as tk
 from tkinter import messagebox
 from openfoodfacts import API, APIVersion, Country, Environment, Flavor
